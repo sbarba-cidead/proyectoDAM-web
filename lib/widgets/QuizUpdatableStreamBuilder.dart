@@ -19,7 +19,6 @@ class _QuizUpdatableStreamBuilderState extends State<QuizUpdatableStreamBuilder>
   String quizSubtitleLabel = "";
   String quizSubtitleQuery = "";
   bool averageGradeVisible = true;
-  String averageGradeLabel = "";
 
   String selectedQuizID = "";
   String selectedQuizName = "";
@@ -47,7 +46,6 @@ class _QuizUpdatableStreamBuilderState extends State<QuizUpdatableStreamBuilder>
         .snapshots();
     quizSubtitleLabel = "Intentos";
     quizSubtitleQuery = "totalAttempts";
-    averageGradeLabel = "averageGrade";
     averageGradeVisible = true;
   }
 
@@ -90,7 +88,7 @@ class _QuizUpdatableStreamBuilderState extends State<QuizUpdatableStreamBuilder>
 
                     return list.isNotEmpty
                         ? SizedBox(
-                            width: MediaQuery.of(context).size.width - 250,
+                            width: 500,
                             height: 350,
                             child: RawScrollbar(
                               controller: PrimaryScrollController.of(context),
@@ -137,15 +135,17 @@ class _QuizUpdatableStreamBuilderState extends State<QuizUpdatableStreamBuilder>
                                                         color: Colors.white
                                                     ),
                                                   ),
-                                                  // Visibility(
-                                                  //   visible: averageGradeVisible,
-                                                  //   child: Text(
-                                                  //     'Nota media: ${list[position][averageGradeLabel]}',
-                                                  //     style: const TextStyle(
-                                                  //         color: Colors.white
-                                                  //     ),
-                                                  //   ),
-                                                  // ),
+                                                  Visibility(
+                                                    visible: averageGradeVisible,
+                                                    child: Text(
+                                                      averageGradeVisible
+                                                      ? 'Nota media: ${list[position]["averageGrade"]}'
+                                                      : '',
+                                                      style: const TextStyle(
+                                                          color: Colors.white
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -164,7 +164,6 @@ class _QuizUpdatableStreamBuilderState extends State<QuizUpdatableStreamBuilder>
                                                   quizSubtitleLabel = "Fecha";
                                                   quizSubtitleQuery = "formattedDate";
                                                   averageGradeVisible = false;
-                                                  averageGradeLabel = "";
                                                   quizSelected = true;
                                                   backButtonVisible = true;
                                                 } else {
@@ -353,7 +352,7 @@ class _QuizUpdatableStreamBuilderState extends State<QuizUpdatableStreamBuilder>
                                   ),
                             ),
                     )
-                        : Center(child:
+                        : const Center(child:
                           Text("No se han completado cuestionarios.")
                         );
                   }
@@ -376,7 +375,6 @@ class _QuizUpdatableStreamBuilderState extends State<QuizUpdatableStreamBuilder>
                   quizSubtitleLabel = "Intentos";
                   quizSubtitleQuery = "totalAttempts";
                   averageGradeVisible = true;
-                  averageGradeLabel = "averageGrade";
                   quizSelected = false;
                   backButtonVisible = false;
 
@@ -389,7 +387,6 @@ class _QuizUpdatableStreamBuilderState extends State<QuizUpdatableStreamBuilder>
                     quizSubtitleLabel = "Fecha";
                     quizSubtitleQuery = "formattedDate";
                     averageGradeVisible = false;
-                    averageGradeLabel = "";
                     attemptSelected = false;
                     quizSelected = true;
                     backButtonVisible = true;
